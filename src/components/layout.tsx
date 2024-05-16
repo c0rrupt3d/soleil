@@ -48,7 +48,7 @@ function Layout() {
 
   return (
     <div className="h-full py-12 w-full flex ">
-      <div className="container justify-between grid grid-cols-12 gap-4 h-full relative max-w-screen-xl w-full items-start">
+      <div className="container px-4 xs:px-8 justify-between grid grid-cols-12 gap-4 h-full relative max-w-screen-xl w-full items-start">
         <div className="mt-10 mb-12 bg-transparent dark:bg-transparent shadow-none border-none col-span-12 min-h-[24rem] ">
           <CurrentWeather />
         </div>
