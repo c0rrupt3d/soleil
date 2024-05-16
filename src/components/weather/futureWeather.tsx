@@ -16,15 +16,14 @@ import { fetchIcon, weatherConditions } from "@/utils/weatherConditions";
 function FutureWeather() {
   const [futureData, setFutureData] = useState<DailyWeather | null>(null);
 
-  const { weatherLoading, weatherData, handleTempChange } =
-    useWeatherStore(
-      useShallow((state) => ({
-        weatherLoading: state.weatherLoading,
-        weatherData: state.weatherData,
-        setWeatherLoading: state.setWeatherLoading,
-        handleTempChange: state.handleTempChange,
-      }))
-    );
+  const { weatherLoading, weatherData, handleTempChange } = useWeatherStore(
+    useShallow((state) => ({
+      weatherLoading: state.weatherLoading,
+      weatherData: state.weatherData,
+      setWeatherLoading: state.setWeatherLoading,
+      handleTempChange: state.handleTempChange,
+    }))
+  );
 
   const { time12, tempUnit } = useSettingsStore(
     useShallow((state) => ({
@@ -86,7 +85,9 @@ function FutureWeather() {
                               className="flex justify-between h-28 w-full p-2 items-center"
                             >
                               <div className="flex flex-col gap-1 text-lg items-start">
-                                <span className="text-start" >{formatter(futureData.time[index])}</span>
+                                <span className="text-start">
+                                  {formatter(futureData.time[index])}
+                                </span>
                                 <span className="font-light text-base">
                                   {" "}
                                   {
@@ -147,7 +148,7 @@ function FutureWeather() {
           </WeatherCard>
         </motion.div>
       ) : (
-        <Skeleton className="h-full w-full" />
+        <Skeleton className="h-[45rem] w-full" />
       )}
     </>
   );
