@@ -15,15 +15,14 @@ import WidgetTitle from "../ui/widget-title";
 function HourlyWeather() {
   const [hourlyData, setHourlyData] = useState<HourlyWeather | null>(null);
 
-  const { weatherLoading, weatherData, handleTempChange } =
-    useWeatherStore(
-      useShallow((state) => ({
-        weatherLoading: state.weatherLoading,
-        weatherData: state.weatherData,
-        setWeatherLoading: state.setWeatherLoading,
-        handleTempChange: state.handleTempChange,
-      }))
-    );
+  const { weatherLoading, weatherData, handleTempChange } = useWeatherStore(
+    useShallow((state) => ({
+      weatherLoading: state.weatherLoading,
+      weatherData: state.weatherData,
+      setWeatherLoading: state.setWeatherLoading,
+      handleTempChange: state.handleTempChange,
+    }))
+  );
 
   const { time12, tempUnit } = useSettingsStore(
     useShallow((state) => ({
