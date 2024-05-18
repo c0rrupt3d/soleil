@@ -11,7 +11,7 @@ function Header() {
             Soleil
           </span>
         </div>
-        <div className="h-10 w-full inline-flex space-x-2 md:space-x-4 items-center justify-between md:justify-end">
+        <div className="h-10 w-full inline-flex space-x-2 md:space-x-4 items-center justify-end ">
           <SearchLocation />
           <SettingsDialog />
         </div>
