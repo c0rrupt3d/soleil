@@ -72,7 +72,10 @@ function HourlyWeather() {
             <WidgetTitle left="Upcoming Hours">
               <Clock className="h-4" />
             </WidgetTitle>
-            <ScrollArea className="pb-2 overflow-y-hidden rounded-xl flex w-full">
+            <ScrollArea
+              type="auto"
+              className="pb-3 overflow-y-hidden flex w-full"
+            >
               <motion.div
                 variants={delayAnim}
                 initial="initial"
@@ -88,12 +91,12 @@ function HourlyWeather() {
                           <motion.div
                             variants={mainAnim}
                             key={index}
-                            className="flex flex-col aspect-square h-32 max-h-32 py-1 px-2 items-center justify-center text-center"
+                            className="flex flex-col h-32 max-h-32 py-0.5 lg:py-1 px-2 sm:px-3 lg:px-0 items-center justify-center text-center"
                           >
                             <div className="font-medium min-h-5 h-5 text-sm">
                               {formatter(hourlyData.time[index])}
                             </div>
-                            <div className="h-full aspect-square flex">
+                            <div className="h-1/2 lg:h-full aspect-square flex">
                               <IconLoader
                                 type="meteo-static"
                                 code={fetchIcon(

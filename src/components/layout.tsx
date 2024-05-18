@@ -48,17 +48,17 @@ function Layout() {
 
   return (
     <div className="h-full py-12 w-full flex ">
-      <div className="container px-4 xs:px-8 justify-between grid grid-cols-12 gap-4 h-full relative max-w-screen-xl w-full items-start">
-        <div className="mt-10 mb-12 bg-transparent dark:bg-transparent shadow-none border-none col-span-12 min-h-[24rem] ">
+      <div className="container px-4 md:px-8 justify-between grid grid-cols-12 gap-4 h-full relative max-w-screen-xl w-full items-start">
+        <div className="mt-10 mb-10 bg-transparent dark:bg-transparent shadow-none border-none col-span-12 min-h-[24rem] ">
           <CurrentWeather />
         </div>
-        <div className="flex flex-col-reverse sm:flex-col col-span-12 sm:col-span-6 md:col-span-7 gap-4">
+        <div className="flex flex-col-reverse md:flex-col col-span-12 md:col-span-6 lg:col-span-7 gap-4">
           <TodayWeather />
           <div>
             <HourlyWeather />
           </div>
         </div>
-        <div className="col-span-12 sm:col-span-6 md:col-span-5 h-fit">
+        <div className="col-span-12 md:col-span-6 lg:col-span-5 h-fit">
           <FutureWeather />
         </div>
       </div>

@@ -17,7 +17,7 @@ const WeatherCard: React.FC<{
     >
       {firstChild && firstChild}
 
-      <div className="h-[calc(100%-2rem)] flex flex-col text-center p-2 text-2xl font-normal items-center justify-center"  >
+      <div className="h-[calc(100%-2rem)] flex flex-col text-center p-2 font-normal items-center justify-center"  >
         {otherChild && otherChild}
       </div>
     </div>

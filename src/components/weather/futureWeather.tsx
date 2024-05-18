@@ -73,73 +73,71 @@ function FutureWeather() {
               >
                 {!weatherLoading && futureData
                   ? futureData.time.map((_: string, index: number) => {
-                      if (index === 0) {
-                        return null;
-                      } else {
-                        return (
-                          <>
-                            {index === 1 ? null : <Separator />}
-                            <motion.div
-                              variants={mainAnim}
-                              key={index}
-                              className="flex justify-between h-28 w-full p-2 items-center"
-                            >
-                              <div className="flex flex-col gap-1 text-lg items-start">
-                                <span className="text-start">
-                                  {formatter(futureData.time[index])}
-                                </span>
-                                <span className="font-light text-base">
-                                  {" "}
-                                  {
-                                    weatherConditions.find(
-                                      (code: WeatherConditionProps) =>
-                                        code.id ===
-                                        futureData.weather_code[index]
-                                    )?.description
-                                  }
-                                </span>
-                              </div>
-                              <div className="flex gap-1 items-center">
-                                <div className="flex gap-1">
-                                  <div className="flex justify-center items-center dark:text-blue-400 text-blue-600 text-lg">
-                                    <Droplet className="h-4" />
-                                    <span>
-                                      {
-                                        futureData
-                                          .precipitation_probability_max[index]
-                                      }
-                                      %
-                                    </span>
-                                  </div>
-                                  <div className="h-full aspect-square flex">
-                                    <IconLoader
-                                      type="meteo-static"
-                                      code={fetchIcon(
-                                        futureData.weather_code[index],
-                                        1
-                                      )}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="flex flex-col text-lg items-end justify-between">
-                                  <span className="text-primary">
-                                    {handleTempChange(
-                                      futureData.temperature_2m_max[index],
-                                      tempUnit
-                                    )}
-                                  </span>
-                                  <span className="text-base">
-                                    {handleTempChange(
-                                      futureData.temperature_2m_min[index],
-                                      tempUnit
-                                    )}
+                      return (
+                        <>
+                          {index === 0 ? null : <Separator />}
+                          <motion.div
+                            variants={mainAnim}
+                            key={index}
+                            className="flex justify-between h-24 w-full px-1.5 items-center"
+                          >
+                            <div className="flex flex-col gap-1 text-lg items-start">
+                              <span className="text-start">
+                                {index === 0
+                                  ? "Today"
+                                  : formatter(futureData.time[index])}
+                              </span>
+                              <span className="font-light text-base">
+                                {" "}
+                                {
+                                  weatherConditions.find(
+                                    (code: WeatherConditionProps) =>
+                                      code.id === futureData.weather_code[index]
+                                  )?.description
+                                }
+                              </span>
+                            </div>
+                            <div className="flex gap-1 items-center">
+                              <div className="flex gap-1">
+                                <div className="flex justify-center items-center dark:text-blue-400 text-blue-600 text-lg">
+                                  <Droplet className="h-4" />
+                                  <span>
+                                    {
+                                      futureData.precipitation_probability_max[
+                                        index
+                                      ]
+                                    }
+                                    {"%"}
                                   </span>
                                 </div>
+                                <div className=" h-12 aspect-square flex">
+                                  <IconLoader
+                                    type="meteo-static"
+                                    code={fetchIcon(
+                                      futureData.weather_code[index],
+                                      1
+                                    )}
+                                  />
+                                </div>
                               </div>
-                            </motion.div>
-                          </>
-                        );
-                      }
+                              <div className="flex flex-col text-lg items-end justify-between">
+                                <span className="text-primary">
+                                  {handleTempChange(
+                                    futureData.temperature_2m_max[index],
+                                    tempUnit
+                                  )}
+                                </span>
+                                <span className="text-base">
+                                  {handleTempChange(
+                                    futureData.temperature_2m_min[index],
+                                    tempUnit
+                                  )}
+                                </span>
+                              </div>
+                            </div>
+                          </motion.div>
+                        </>
+                      );
                     })
                   : null}
               </motion.div>

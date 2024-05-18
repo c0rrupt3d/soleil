@@ -19,7 +19,7 @@ export function fetchLocations<T = any>(options: {
   const { name, signal } = options;
   const newName = name.replace(/\s+/g, " ");
 
-  const url = `${GEO_API}?name=${newName}&count=50&language=en&format=json`;
+  const url = `${GEO_API}?name=${newName}&count=15&language=en&format=json`;
 
   return request<T>(new URL(url), { signal });
 }
@@ -27,7 +27,7 @@ export function fetchLocations<T = any>(options: {
 export function fetchForecast<T = any>(options: { lat: number; lon: number }) {
   const { lat, lon } = options;
 
-  const url = `${FORECAST_API}?latitude=${lat}&longitude=${lon}&timezone=auto&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,visibility,precipitation_probability,dew_point_2m,weather_code&daily=weather_code,temperature_2m_max,sunrise,sunset,temperature_2m_min,uv_index_max,precipitation_probability_max&forecast_hours=24&forecast_days=8`;
+  const url = `${FORECAST_API}?latitude=${lat}&longitude=${lon}&timezone=auto&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,visibility,precipitation_probability,dew_point_2m,weather_code&daily=weather_code,temperature_2m_max,sunrise,sunset,temperature_2m_min,uv_index_max,precipitation_probability_max&forecast_hours=24&forecast_days=7`;
 
   return request<T>(new URL(url));
 }

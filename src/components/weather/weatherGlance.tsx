@@ -14,7 +14,7 @@ const WeatherGlance: React.FC<{
     <motion.div
       variants={mainAnim}
       className={cn(
-        "aspect-square flex flex-col w-full items-center justify-center col-span-1",
+        "h-full lg:aspect-square flex flex-col w-full items-center justify-center col-span-1",
         className
       )}
     >

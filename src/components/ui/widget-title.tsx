@@ -8,7 +8,7 @@ const WidgetTitle: React.FC<{
   children?: ReactNode;
 }> = ({ left, right, alt, children }) => {
   return (
-    <div className="text-sm whitespace-nowrap overflow-hidden font-medium h-8 w-full flex flex-col text-start justify-between">
+    <div className="text-sm whitespace-nowrap overflow-hidden h-8 w-full flex flex-col text-start justify-between">
       <h3 className="flex justify-between items-center h-8">
         <div className={`flex ${!children ? "px-2" : "pr-2 pl-0.5"} items-center`}>
           {children} <span>{left}</span>{" "}

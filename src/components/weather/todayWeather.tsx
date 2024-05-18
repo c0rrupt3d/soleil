@@ -92,20 +92,11 @@ function TodayWeather() {
     <>
       {!weatherLoading && !loading ? (
         <motion.div
-          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full items-center justify-start h-full gap-4"
+          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 w-full items-center justify-start h-full gap-4 text-lg lg:text-2xl"
           variants={anim}
           initial="initial"
           animate="animate"
         >
-          <WeatherGlance>
-            <WidgetTitle left="Pressure">
-              <CircleGauge className="h-4" />
-            </WidgetTitle>
-            <span>
-              {weatherData && Math.round(weatherData.current.surface_pressure)}{" "}
-              mBar
-            </span>
-          </WeatherGlance>
           <WeatherGlance>
             <WidgetTitle left="Wind">
               <Wind className="h-4" />
@@ -130,6 +121,28 @@ function TodayWeather() {
             </div>
           </WeatherGlance>
           <WeatherGlance>
+            <WidgetTitle left="AQI">
+              <AirVent className="h-4" />
+            </WidgetTitle>
+            <div>{weatherAqi && weatherAqi.current.us_aqi}</div>
+            <div className="text-base lg:text-lg">
+              {"("}
+              {weatherAqi && getAQICondition(weatherAqi.current.us_aqi)}
+              {")"}
+            </div>
+          </WeatherGlance>
+          <WeatherGlance>
+            <WidgetTitle left="UV Index">
+              <Sun className="h-4" />
+            </WidgetTitle>
+            <div>
+              {weatherData && Math.ceil(weatherData.daily.uv_index_max[0])}
+            </div>
+            <div className="text-base lg:text-lg">
+              {weatherData && getUvCondition(weatherData.daily.uv_index_max[0])}
+            </div>
+          </WeatherGlance>
+          <WeatherGlance>
             <WidgetTitle left="Elevation">
               <AreaChart className="h-4" />
             </WidgetTitle>
@@ -140,32 +153,10 @@ function TodayWeather() {
               )}
           </WeatherGlance>
           <WeatherGlance>
-            <WidgetTitle left="AQI">
-              <AirVent className="h-4" />
-            </WidgetTitle>
-            <div>{weatherAqi && weatherAqi.current.us_aqi}</div>
-            <div className="text-lg">
-              {"("}
-              {weatherAqi && getAQICondition(weatherAqi.current.us_aqi)}
-              {")"}
-            </div>
-          </WeatherGlance>
-          <WeatherGlance>
             <WidgetTitle left="Humidity">
               <Droplets className="h-4" />
             </WidgetTitle>
             {weatherData && weatherData.current.relative_humidity_2m}%
-          </WeatherGlance>
-          <WeatherGlance>
-            <WidgetTitle left="UV Index">
-              <Sun className="h-4" />
-            </WidgetTitle>
-            <div>
-              {weatherData && Math.ceil(weatherData.daily.uv_index_max[0])}
-            </div>
-            <div className="text-lg">
-              {weatherData && getUvCondition(weatherData.daily.uv_index_max[0])}
-            </div>
           </WeatherGlance>
           <WeatherGlance>
             <WidgetTitle left="Visibility">
@@ -181,17 +172,21 @@ function TodayWeather() {
             {weatherData &&
               handleTempChange(weatherData.hourly.dew_point_2m[0], tempUnit)}
           </WeatherGlance>
+          <WeatherGlance>
+            <WidgetTitle left="Pressure">
+              <CircleGauge className="h-4" />
+            </WidgetTitle>
+            <span>
+              {weatherData && Math.round(weatherData.current.surface_pressure)}{" "}
+              mBar
+            </span>
+          </WeatherGlance>
         </motion.div>
       ) : (
-        <div className="grid grid-cols-4 w-full items-center justify-start h-full gap-4">
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
-          <Skeleton className="aspect-square w-full" />
+        <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 w-full items-center justify-start h-full gap-4">
+          {Array.from({ length: 8 }).map((_: any, index: number) => (
+            <Skeleton className="aspect-square w-full" key={index} />
+          ))}
         </div>
       )}
     </>
