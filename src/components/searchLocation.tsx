@@ -40,7 +40,9 @@ function SearchLocation() {
   const [geoLoading, setGeoLoading] = useState<boolean>(false);
 
   const handleLocation = (
-    res: GeocodeSearch | Pick<GeocodeSearch, "latitude" | "longitude" | "name" | "country_code">
+    res:
+      | GeocodeSearch
+      | Pick<GeocodeSearch, "latitude" | "longitude" | "name" | "country_code">
   ) => {
     setWeatherCoords({
       lat: res.latitude,
@@ -48,7 +50,7 @@ function SearchLocation() {
     });
     setWeatherLoc({
       name: res.name,
-      country_code: res.country_code
+      country_code: res.country_code,
     });
     setOpen(false);
   };
@@ -73,7 +75,8 @@ function SearchLocation() {
               result.features[0].properties.geocoding.label.split(",");
             setWeatherLoc({
               name: lab[0].trim(),
-              country_code: result.features[0].properties.geocoding.country_code
+              country_code:
+                result.features[0].properties.geocoding.country_code,
             });
             setOpen(false);
           } catch (err) {
@@ -91,13 +94,13 @@ function SearchLocation() {
                   title: "Uh oh! Permission denied.",
                   description:
                     "Location access was denied. Using default location - New Delhi.",
-                    variant: "destructive"
+                  variant: "destructive",
                 });
                 handleLocation({
                   latitude: 28.5275544,
                   longitude: 77.0441755,
                   name: "New Delhi",
-                  country_code: "IN"
+                  country_code: "IN",
                 });
 
                 break;
@@ -207,49 +210,51 @@ function SearchLocation() {
           </div>
           <ScrollArea className="rounded-md h-[88%]">
             <div>
-              {results?.length > 0 ? (
-                results.map((res) => {
-                  return (
-                    <Button
-                      className="w-full flex h-14 space-x-2 justify-start px-2"
-                      variant="ghost"
-                      onClick={() => handleLocation(res)}
-                    >
-                      <div className="h-3/4 aspect-square">
-                        <IconLoader
-                          type="flag"
-                          code={`${res.country_code.toLowerCase()}`}
-                        />
-                      </div>
-
-                      <div className="flex flex-col h-full truncate items-start justify-center">
-                        <div className="text-lg font-medium">{res.name}</div>
-                        <div className="text-xs font-light flex">
-                          {res.country}
-                        </div>
-                      </div>
-                    </Button>
-                  );
-                })
-              ) : (
-                <Button
-                  className="w-full flex h-14 space-x-2 justify-start px-2"
-                  variant="link"
-                  onClick={() => requestReverseGeo()}
-                  disabled={geoLoading}
-                >
-                  {geoLoading ? (
-                    <LoaderCircle className="animate-spin" />
-                  ) : (
-                    <MapPin />
-                  )}
-                  <div className="flex flex-col h-full truncate items-start justify-center">
-                    <div className="text-md font-semibold">
-                      {geoLoading ? "Fetching..." : "Use current location"}
-                    </div>
+              <Button
+                className="w-full flex h-14 space-x-2 justify-start px-2"
+                variant="link"
+                onClick={() => requestReverseGeo()}
+                disabled={geoLoading}
+              >
+                {geoLoading ? (
+                  <LoaderCircle className="animate-spin" />
+                ) : (
+                  <MapPin />
+                )}
+                <div className="flex flex-col h-full truncate items-start justify-center">
+                  <div className="text-md font-semibold">
+                    {geoLoading ? "Fetching..." : "Use current location"}
                   </div>
-                </Button>
-              )}
+                </div>
+              </Button>
+              {results?.length > 0
+                ? results.map((res) => {
+                    return (
+                      <Button
+                        className="w-full flex min-h-14 h-full space-x-2 justify-start px-2 py-1 my-0"
+                        variant="ghost"
+                        onClick={() => handleLocation(res)}
+                      >
+                        <div className="h-8 aspect-square">
+                          <IconLoader
+                            type="flag"
+                            code={`${res.country_code.toLowerCase()}`}
+                          />
+                        </div>
+
+                        <div className="flex flex-col h-full truncate items-start justify-center">
+                          <div className="text-lg font-medium">{res.name}</div>
+                          <div className="text-xs font-light flex whitespace-normal text-left">
+                            {res.admin3 && res.admin3 + ", "}
+                            {res.admin2 && res.admin2 + ", "}
+                            {res.admin1 && res.admin1 + ", "}
+                            {res.country}
+                          </div>
+                        </div>
+                      </Button>
+                    );
+                  })
+                : null}
             </div>
           </ScrollArea>
         </div>
