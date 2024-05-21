@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app.tsx";
 import "@fontsource-variable/inter";
+import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "@/components/ui/toaster.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -10,5 +11,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <App />
     </main>
     <Toaster/>
+    <Analytics/>
   </React.StrictMode>
 );
